@@ -1,181 +1,144 @@
-import { Github, Mail, BookOpen, ArrowRight, ExternalLink, Sparkles } from 'lucide-react'
-import { products, socialLinks, personalInfo } from '@/data/products'
+'use client'
+
+import { useEffect, useRef } from 'react'
+import ThreeBackground from '@/components/ThreeBackground'
+import GeometricAccent from '@/components/GeometricAccent'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { ArrowRight, Sparkles, ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
-  const product = products[0] // AI-Cast
+  const contentRef = useRef<HTMLDivElement>(null)
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * -40
+      mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * -40
+      
+      if (contentRef.current) {
+        contentRef.current.style.transform = 
+          `translate3d(${mouseRef.current.x}px, ${mouseRef.current.y}px, 0)`
+      }
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    return () => document.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
-            <Sparkles size={16} />
-            First Web3 Product Launched
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
-            Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">{personalInfo.name}</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-4">
-            {personalInfo.title}
-          </p>
-          
-          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8">
-            {personalInfo.description}
-          </p>
-          
-          {/* Social Links */}
-          <div className="flex justify-center gap-4 mb-12">
-            <a 
-              href={socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"
-            >
-              <Github size={20} />
-              <span>GitHub</span>
-            </a>
-            <a 
-              href={socialLinks.blog}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-            >
-              <BookOpen size={20} />
-              <span>Blog</span>
-            </a>
-            <a 
-              href={socialLinks.email}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-            >
-              <Mail size={20} />
-              <span>Contact</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Product - AI-Cast */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-              Featured Product
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400">
-              My first Web3 product combining AI and blockchain
-            </p>
-          </div>
-          
-          {/* AI-Cast Card */}
-          <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
-              <div className="flex items-center justify-between">
-                <h3 className="text-3xl font-bold text-white">{product.name}</h3>
-                <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-full">
-                  {product.status === 'live' ? '🟢 Live' : 'In Development'}
-                </span>
-              </div>
+    <main className="relative min-h-screen overflow-hidden" style={{ background: 'var(--bg)' }}>
+      {/* Background layers */}
+      <ThreeBackground />
+      <GeometricAccent />
+      
+      {/* UI Layer */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <Header />
+        
+        {/* Main Content */}
+        <div className="flex-1 flex items-center px-8 md:px-20 lg:px-32">
+          <div 
+            ref={contentRef}
+            className="max-w-2xl will-change-transform"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/50 text-[var(--accent-blue)] text-sm font-medium mb-8">
+              <Sparkles size={16} />
+              First Web3 Product
             </div>
             
-            <div className="p-8">
-              <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                {product.description}
+            {/* Main Title */}
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.9] tracking-tight text-[#0a0a0a] mb-8"
+                style={{ 
+                  textShadow: '0 2px 30px rgba(255,255,255,0.8), 0 0 60px rgba(255,255,255,0.4)',
+                  maxWidth: '60%'
+                }}>
+              Davi
+              <br />
+              Rain
+            </h1>
+            
+            {/* Subtitle with accent line */}
+            <div className="relative pl-5 mb-12">
+              <div 
+                className="absolute left-0 top-1.5 bottom-1.5 w-px"
+                style={{ backgroundColor: 'var(--accent-blue)' }}
+              />
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed max-w-md">
+                AI Agent Developer building decentralized applications. 
+                Creator of <span className="text-[var(--text-main)] font-medium">AI-Cast</span>, 
+                the first on-chain AI podcast platform.
               </p>
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Link 
+                href="/products"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-[var(--text-main)] text-white rounded-none text-sm tracking-wide hover:bg-[var(--accent-blue)] transition-colors"
+              >
+                View Products
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
               
-              <div className="flex flex-wrap gap-2 mb-8">
-                {product.tags.map((tag) => (
-                  <span 
-                    key={tag}
-                    className="px-3 py-1.5 text-sm rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href={product.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
-                >
-                  <Github size={18} />
-                  View on GitHub
-                </a>
-                {product.demo && (
-                  <a 
-                    href={product.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-                  >
-                    <ExternalLink size={18} />
-                    Live Demo
-                  </a>
-                )}
-              </div>
+              <Link 
+                href="https://github.com/DaviRain-Su"
+                target="_blank"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--text-main)] text-[var(--text-main)] rounded-none text-sm tracking-wide hover:bg-[var(--text-main)] hover:text-white transition-colors"
+              >
+                GitHub
+                <ExternalLink size={14} />
+              </Link>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Dev Tools Note */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="bg-slate-100 dark:bg-slate-800/50 rounded-2xl p-8">
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
-              Open Source Tools
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
-              I also build various developer tools and libraries. 
-              Check out my GitHub for SDKs, CLI tools, and experimental projects.
-            </p>
-            <a 
-              href={socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Browse all projects on GitHub
-              <ArrowRight size={16} />
-            </a>
+        
+        {/* Featured Product Preview */}
+        <div className="px-8 md:px-20 lg:px-32 pb-32">
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-xs tracking-widest uppercase text-[var(--text-muted)]">
+                Featured Product
+              </span>
+              <div className="flex-1 h-px bg-[var(--text-muted)]/20" />
+            </div>
+            
+            <Link href="/products" className="group block">
+              <div className="bg-white/50 backdrop-blur-sm border border-[var(--text-muted)]/10 p-8 hover:border-[var(--accent-blue)]/30 transition-colors">
+                <div className="flex items-start justify-between mb-4">
+                  <h2 className="font-serif text-3xl md:text-4xl font-semibold text-[var(--text-main)]">
+                    AI-Cast
+                  </h2>
+                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                    Live
+                  </span>
+                </div>
+                
+                <p className="text-[var(--text-muted)] mb-6 max-w-xl">
+                  Decentralized AI Podcast Platform on Sui & Walrus. 
+                  Transform articles into on-chain podcasts using AI agents.
+                </p>
+                
+                <div className="flex flex-wrap gap-2">
+                  {['AI', 'Podcast', 'Sui', 'Walrus', 'Web3'].map((tag) => (
+                    <span 
+                      key={tag}
+                      className="px-3 py-1 text-xs bg-[var(--bg)] text-[var(--text-muted)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="max-w-3xl mx-auto text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white">
-          <h2 className="text-3xl font-bold mb-4">Let&apos;s Connect</h2>
-          <p className="text-blue-100 mb-8 text-lg">
-            Interested in AI agents, Web3, or decentralized systems? 
-            Let&apos;s talk.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a 
-              href={socialLinks.email}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-            >
-              Get in Touch
-              <ArrowRight size={20} />
-            </a>
-            <a 
-              href={socialLinks.blog}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors"
-            >
-              Read Blog
-              <BookOpen size={20} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 text-center text-slate-400 dark:text-slate-500 text-sm">
-        <p>© {new Date().getFullYear()} DaviRain. Built with Next.js & Tailwind CSS.</p>
-      </footer>
+        
+        <Footer />
+      </div>
     </main>
   )
 }

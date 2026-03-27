@@ -1,12 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'DaviRain - AI Agent Developer',
-  description: 'Building the future of autonomous AI and blockchain technology',
+  description: 'Building decentralized AI applications. Creator of AI-Cast, the first on-chain AI podcast platform.',
+  keywords: ['AI', 'Web3', 'Blockchain', 'Sui', 'Agent', 'DaviRain'],
+  authors: [{ name: 'DaviRain' }],
+  openGraph: {
+    title: 'DaviRain - AI Agent Developer',
+    description: 'Building decentralized AI applications',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -16,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="antialiased">
+        {children}
+      </body>
     </html>
   )
 }
