@@ -54,7 +54,7 @@ export default function BlogPage() {
           </div>
           
           <a 
-            href="https://blog-rivs4hfz0-davirainsus-projects.vercel.app"
+            href="https://blog-7k7ajujqu-davirainsus-projects.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--text-main)] text-white hover:bg-[var(--accent-blue)] transition-colors"
