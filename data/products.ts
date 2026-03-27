@@ -13,7 +13,7 @@ export const products = [
 export const socialLinks = {
   github: 'https://github.com/DaviRain-Su',
   email: 'mailto:davirain.yin@gmail.com',
-  blog: 'https://blog-38rtw11aw-davirainsus-projects.vercel.app'
+  blog: 'https://blog-rivs4hfz0-davirainsus-projects.vercel.app'
 }
 
 export const personalInfo = {
