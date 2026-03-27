@@ -11,7 +11,7 @@ Personal portfolio website with modern design and Three.js animations.
 - **3D Background**: Interactive Three.js particle animation
 - **Parallax Effects**: Mouse-driven content movement
 - **Product Showcase**: AI-Cast featured prominently
-- **Blog Integration**: Links to Jekyll blog
+- **Blog Integration**: Links to Next.js blog on Vercel
 - **Responsive**: Works on all devices
 
 ## 🎨 Design System
@@ -66,7 +66,7 @@ public/                  # Static assets
 ## 🔗 Links
 
 - **Live Site**: https://davirain-portal.vercel.app
-- **Blog**: https://davirain-su.github.io/blog
+- **Blog**: https://blog-38rtw11aw-davirainsus-projects.vercel.app
 - **GitHub**: https://github.com/DaviRain-Su
 
 ## 📝 Tech Stack

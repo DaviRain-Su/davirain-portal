@@ -37,7 +37,7 @@ export default function BlogPage() {
           
           <div className="bg-white/30 border border-[var(--text-muted)]/10 p-8 mb-8">
             <p className="text-[var(--text-muted)] mb-6">
-              My blog is hosted on GitHub Pages using Jekyll. 
+              My blog built with Next.js and deployed on Vercel. 
               It contains 17+ articles covering various technical topics.
             </p>
             
@@ -54,7 +54,7 @@ export default function BlogPage() {
           </div>
           
           <a 
-            href="https://davirain-su.github.io/blog"
+            href="https://blog-38rtw11aw-davirainsus-projects.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--text-main)] text-white hover:bg-[var(--accent-blue)] transition-colors"
